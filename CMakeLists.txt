@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.8)
 project(ftrl)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -15,8 +15,6 @@ set(SOURCE_FILES
         src/Utils/utils.h
         auc.cpp
         ftrl_predict.cpp
-        ftrl_train.cpp
-        Makefile
-        README)
+        ftrl_train.cpp)
 
 add_executable(ftrl ${SOURCE_FILES})

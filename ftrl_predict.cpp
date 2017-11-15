@@ -1,6 +1,3 @@
-//
-// Created by liyongbao on 15-7-22.
-//
 #include <iostream>
 #include <fstream>
 #include "src/Trainer/FTRL.h"

@@ -4,11 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/wangke/work/workspace/ad/ftrl/auc.cpp" "/Users/wangke/work/workspace/ad/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/auc.cpp.o"
-  "/Users/wangke/work/workspace/ad/ftrl/ftrl_predict.cpp" "/Users/wangke/work/workspace/ad/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/ftrl_predict.cpp.o"
-  "/Users/wangke/work/workspace/ad/ftrl/ftrl_train.cpp" "/Users/wangke/work/workspace/ad/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/ftrl_train.cpp.o"
-  "/Users/wangke/work/workspace/ad/ftrl/src/Trainer/FTRL.cpp" "/Users/wangke/work/workspace/ad/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/src/Trainer/FTRL.cpp.o"
-  "/Users/wangke/work/workspace/ad/ftrl/src/Utils/utils.cpp" "/Users/wangke/work/workspace/ad/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/src/Utils/utils.cpp.o"
+  "/Users/troy/workspace/code/ftrl/auc.cpp" "/Users/troy/workspace/code/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/auc.cpp.o"
+  "/Users/troy/workspace/code/ftrl/ftrl_predict.cpp" "/Users/troy/workspace/code/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/ftrl_predict.cpp.o"
+  "/Users/troy/workspace/code/ftrl/ftrl_train.cpp" "/Users/troy/workspace/code/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/ftrl_train.cpp.o"
+  "/Users/troy/workspace/code/ftrl/src/Trainer/FTRL.cpp" "/Users/troy/workspace/code/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/src/Trainer/FTRL.cpp.o"
+  "/Users/troy/workspace/code/ftrl/src/Utils/utils.cpp" "/Users/troy/workspace/code/ftrl/cmake-build-debug/CMakeFiles/ftrl.dir/src/Utils/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
