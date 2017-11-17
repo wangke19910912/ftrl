@@ -1,7 +1,3 @@
-//
-// Created by liyongbao on 15-7-22.
-//
-
 #include "FTRL.h"
 using std::pair;
 const std::string spliter=" ";
@@ -9,6 +5,7 @@ const std::string innerSpliter =":";
 const int cap = 5000;
 const int log_num =200000;
 bool FTRL::init(int type){
+    //初始化读取线程和计算线程
     sem_init(&sem,0,0);
     sem_init(&semPro,0,1);
     this->type = type;
@@ -48,7 +45,8 @@ void FTRL::inputThread(){
                 break;
             }
             line_num++;
-            lineQueue.push(line);
+            if(!line.empty())
+                lineQueue.push(line);
             if(line_num%log_num==0)
             {
                 if(type == 1)
@@ -133,36 +131,6 @@ void FTRL::predictThread(){
     queueMtx.unlock();
     delete entity;
 }
-
-/*void FTRL::train(const std::vector<pair<std::string, double> >& fea, int label) {
-    std::vector<ModelUnit*> tempvec(fea.size(),NULL);
-    double p = 0.0;
-    for (int i = 0; i < fea.size(); ++i) {
-        const std::string& index = fea[i].first;
-        tempvec[i] = WGSZN->getOrInitDB(index);
-        ModelUnit& modelUnit = *(tempvec[i]);
-        modelUnit.mtx.lock();
-        if(fabs(modelUnit.z.load()) <= lambda1) {
-            modelUnit.w.store(0.0);
-        } else {
-            modelUnit.w.store((-1) *
-                              (1 / (lambda2 + (beta + sqrt(modelUnit.n.load())) / alpha)) *
-                              (modelUnit.z.load() - utils::sgn(modelUnit.z.load()) * lambda1));
-        }
-        p += modelUnit.w.load() * fea[i].second;
-        modelUnit.mtx.unlock();
-    }
-    p = utils::sigmoid(p);
-    for (int i = 0; i < fea.size(); ++i) {
-        ModelUnit& modelUnit = *(tempvec[i]);
-        modelUnit.mtx.lock();
-        modelUnit.g.store((p-label) * (fea[i].second));
-        modelUnit.s.store(1 / alpha * (sqrt(modelUnit.n.load() + modelUnit.g.load() * modelUnit.g.load()) - sqrt(modelUnit.n.load())));
-        modelUnit.z.store(modelUnit.z.load() + modelUnit.g.load() - modelUnit.s.load() * modelUnit.w.load());
-        modelUnit.n.store(modelUnit.n.load() + modelUnit.g.load() * modelUnit.g.load());
-        modelUnit.mtx.unlock();
-    }
-}*/
 
 void FTRL::train(const std::vector<pair<std::string, double> >& fea, int label) {
     std::vector<ModelUnit*> tempvec(fea.size(),NULL);

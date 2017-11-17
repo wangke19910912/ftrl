@@ -1,7 +1,3 @@
-//
-// Created by liyongbao on 15-7-22.
-//
-
 #ifndef FTRL_MODELUNIT_H
 #define FTRL_MODELUNIT_H
 #include <string>

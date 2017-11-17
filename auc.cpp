@@ -1,7 +1,3 @@
-//
-// Created by liyongbao on 15-8-5.
-//
-
 #ifndef FTRL_TRAIN_AUC_H
 #define FTRL_TRAIN_AUC_H
 #include "fstream"
