@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     if(argc != 2)
     {
         cout << "wrong argc" << endl;
-        cout << "cat predictFile | ./logloss class_num" << endl;
+        cout << "cat predictFile(label probability1 probability2 ...) | ./logloss class_num" << endl;
         return EXIT_FAILURE;
     }
     int classNum = stoi(argv[1]);
