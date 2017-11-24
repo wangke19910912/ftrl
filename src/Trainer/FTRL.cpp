@@ -210,11 +210,11 @@ void FTRL::parseLineToEntity(const std::string& line, EntityUnit *entity) {
 }
 
 void FTRL::printW(std::ofstream& out) {
-    WGSZN->print(out);
+        WGSZN->print(out,outputType);
 }
 
 bool FTRL::loadModel(std::ifstream& fModel){
-    if(!WGSZN->loadModel(fModel)){
+    if(!WGSZN->loadModel(fModel,outputType)){
         return false;
     }
     return (WGSZN->isBiasInModel() == addBias);

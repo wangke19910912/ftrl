@@ -7,8 +7,8 @@
 #include "../Unit/modelUnit.h"
 class VirtualDB{
 public:
-    virtual void print(std::ofstream& out) = 0;
-    virtual bool loadModel(std::ifstream& in) = 0;
+    virtual void print(std::ofstream& out,bool isBinaryType) = 0;
+    virtual bool loadModel(std::ifstream& in,bool isBinaryType) = 0;
     virtual bool loadNonZeroWeight(std::ifstream& in) = 0;
     virtual ModelUnit* getOrInitDB(std::string k) = 0;
     virtual double get(std::string k) = 0;

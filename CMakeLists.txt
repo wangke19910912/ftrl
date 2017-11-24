@@ -15,6 +15,7 @@ set(SOURCE_FILES
         src/Utils/utils.h
         auc.cpp
         ftrl_predict.cpp
-        ftrl_train.cpp)
+        ftrl_train.cpp
+        logloss.cpp)
 
 add_executable(ftrl ${SOURCE_FILES})

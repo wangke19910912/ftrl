@@ -1,18 +1,20 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <iostream>
 #include "src/Trainer/FTRL.h"
 
 
 struct Option {
     Option() : alpha(0.05f), beta(1.0f), lambda1(0.1f), lambda2(5.0f),
-               nr_threads(1), b_init(false), model_size(100000), b_addBias(false) {}
+               nr_threads(1), b_init(false), model_size(100000), b_addBias(false),b_outputType(true) {}
 
     std::string model_path, init_m_path;
     double alpha, beta, lambda1, lambda2;
     int nr_threads, model_size;
     bool b_init;
     bool b_addBias;
+    bool b_outputType;
 };
 
 std::string train_help() {
@@ -30,6 +32,7 @@ std::string train_help() {
                     "-im <initial_m>: set the initial value of model\n"
                     "-size <model_size>: set the largest size of model\n"
                     "-bias <1/0>: set the bias, the value can only be 1 or 0\tdefault:0\n"
+                    "-type <1/0>: set the output type,0 for txt,1 for binary\tdefault:1\n"
     );
 }
 
@@ -91,6 +94,18 @@ Option parse_option(std::vector<std::string> const &args) {
             } else {
                 throw std::invalid_argument("invalid command\n");
             }
+        } else if((args[i].compare("-type") == 0)){
+            if (i == argc - 1)
+                throw std::invalid_argument("invalid command\n");
+            std::string value = args[++i];
+            if (value.compare("1") == 0) {
+                opt.b_outputType = true;
+            } else if (value.compare("0") == 0) {
+                opt.b_outputType = false;
+            } else {
+                throw std::invalid_argument("invalid command\n");
+            }
+
         } else {
             break;
         }
@@ -111,7 +126,7 @@ int main(int argc, char *argv[]) {
         std::cout << e.what();
         return EXIT_FAILURE;
     }
-    FTRL modelObj(opt.alpha, opt.beta, opt.lambda1, opt.lambda2, opt.nr_threads, opt.model_size, opt.b_addBias);
+    FTRL modelObj(opt.alpha, opt.beta, opt.lambda1, opt.lambda2, opt.nr_threads, opt.model_size, opt.b_addBias,opt.b_outputType);
 
     if(opt.b_init) {
         std::ifstream f_temp(opt.init_m_path.c_str());
@@ -123,7 +138,7 @@ int main(int argc, char *argv[]) {
     }
 
     modelObj.run(1); // for train
-    std::ofstream f_weight(opt.model_path.c_str(), std::ofstream::out);
+    std::ofstream f_weight(opt.model_path.c_str(), std::ios::out|std::ofstream::binary);
     modelObj.printW(f_weight);
 }
 
