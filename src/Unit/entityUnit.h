@@ -11,6 +11,7 @@ public:
         return r;
     }
     int label;
+    double weight;
     std::vector<std::pair<std::string, double> > feature;
 };
 #endif //FTRL_ENTITYUNIT_H

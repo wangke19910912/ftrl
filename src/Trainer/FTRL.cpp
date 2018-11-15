@@ -82,7 +82,7 @@ void FTRL::trainThread(){
         sem_post(&semPro);
         for(int i=0;i<input_vec.size();i++){
             parseLineToEntity(input_vec[i], entity);
-            train(entity->feature,entity->label);
+            train(entity->feature,entity->label,entity->weight);
         }
         if(finished_flag)
             break;
@@ -132,7 +132,7 @@ void FTRL::predictThread(){
     delete entity;
 }
 
-void FTRL::train(const std::vector<pair<std::string, double> >& fea, int label) {
+void FTRL::train(const std::vector<pair<std::string, double> >& fea, int label, double weight) {
     std::vector<ModelUnit*> tempvec(fea.size(),NULL);
     double p = 0.0;
     for (int i = 0; i < fea.size(); ++i) {
@@ -154,7 +154,7 @@ void FTRL::train(const std::vector<pair<std::string, double> >& fea, int label) 
     for (int i = 0; i < fea.size(); ++i) {
         ModelUnit& modelUnit = *(tempvec[i]);
         modelUnit.mtx.lock();
-        modelUnit.g = (p-label) * (fea[i].second);
+        modelUnit.g = weight * (p-label) * (fea[i].second);
         modelUnit.s = 1 / alpha * (sqrt(modelUnit.n + modelUnit.g * modelUnit.g) - sqrt(modelUnit.n));
         modelUnit.z += modelUnit.g - modelUnit.s * modelUnit.w;
         modelUnit.n += modelUnit.g * modelUnit.g;
@@ -176,8 +176,17 @@ void FTRL::parseLineToEntity(const std::string& line, EntityUnit *entity) {
     entity->feature.clear();
     std::size_t posb=line.find_first_not_of(spliter,0);
     std::size_t pose=line.find_first_of(spliter,posb);
-    int label=atoi(line.substr(posb,pose-posb).c_str());
+
+    std::string label_weight = line.substr(posb,pose-posb);
+    std::string label_str = label_weight.substr(0,label_weight.find_first_of(innerSpliter,0));
+    std::string weight_str = label_weight.substr(label_weight.find_first_of(innerSpliter,0)+1,label_weight.length());
+
+    int label=atoi(label_str.c_str());
+    double weight=std::stod(weight_str.c_str());
+
     entity->label=label>0?1:0;
+    entity->weight = weight>0?weight:1;
+
     std::string key;
     double value;
     while(pose<line.size()){

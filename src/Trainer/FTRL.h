@@ -55,7 +55,7 @@ private:
     VirtualDB* WGSZN;
     void parseLineToEntity(const std::string& line, EntityUnit *unit);
     double predict(const std::vector<std::pair<std::string, double> >& fea);
-    void train(const std::vector<std::pair<std::string, double> >& fea, int label);
+    void train(const std::vector<std::pair<std::string, double> >& fea, int label,double weight);
     void trainThread();
     void predictThread();
     void inputThread();
